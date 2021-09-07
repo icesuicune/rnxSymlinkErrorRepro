@@ -3,49 +3,62 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "depcheck": "react-native rnx-dep-check --write",
+    "test": "react-native rnx-test --platform ios",
+    "bundle": "react-native rnx-bundle",
+    "bundle+esbuild": "react-native rnx-bundle --bundle-prefix 'main+esbuild' --experimental-tree-shake",
+    "bundle:android": "react-native rnx-bundle --platform android",
+    "bundle:ios": "react-native rnx-bundle --platform ios",
+    "bundle:macos": "react-native rnx-bundle --platform macos",
+    "bundle:windows": "react-native rnx-bundle --platform windows",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "macos": "react-native run-macos --scheme ReactTestApp",
+    "start": "react-native rnx-start --project-root ./"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.5",
+    "@react-native-community/hooks": "^2.6.0",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
+    "hermes-engine": "~0.8.1",
     "react": "17.0.2",
-    "react-native": "^0.65.0-0"
+    "react-native": "^0.65.0-0",
+    "react-native-screens": "^3.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^2.0.0",
     "@react-native-community/cli": "^6.0.0-0",
-    "@rnx-kit/babel-preset-metro-react-native": "*",
-    "@rnx-kit/cli": "*",
     "@react-native-community/cli-platform-android": "^6.0.0-0",
     "@react-native-community/cli-platform-ios": "^6.0.0-0",
-    "@rnx-kit/dep-check": "^*",
-    "@rnx-kit/metro-resolver-symlinks": "*",
-    "@rnx-kit/jest-preset": "*",
-    "@rnx-kit/metro-config": "*",
-    "@rnx-kit/metro-plugin-cyclic-dependencies-detector": "*",
-    "@rnx-kit/metro-plugin-duplicates-checker": "*",
-    "@rnx-kit/metro-plugin-typescript-validation": "*",
-    "@rnx-kit/metro-serializer": "*",
-    "@rnx-kit/metro-serializer-esbuild": "*",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@rnx-kit/babel-preset-metro-react-native": "*",
+    "@rnx-kit/cli": "0.9.25",
+    "@rnx-kit/dep-check": "1.7.10",
+    "@rnx-kit/jest-preset": "0.1.1",
+    "@rnx-kit/metro-config": "1.2.12",
+    "@rnx-kit/metro-plugin-cyclic-dependencies-detector": "1.0.11",
+    "@rnx-kit/metro-plugin-duplicates-checker": "1.2.5",
+    "@rnx-kit/metro-plugin-typescript-validation": "1.0.7",
+    "@rnx-kit/metro-resolver-symlinks": "0.1.2",
+    "@rnx-kit/metro-serializer": "1.0.2",
+    "@rnx-kit/metro-serializer-esbuild": "0.0.14",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.5",
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^26.6.3",
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.66.2",
     "react-native-codegen": "^0.0.7",
+    "react-native-test-app": "^0.7.0",
     "react-test-renderer": "17.0.2",
-    "typescript": "^3.8.3",
-    "metro-react-native-babel-preset": "^0.66.2"
+    "typescript": "^4.0.0"
   },
   "resolutions": {
     "@types/react": "^17"
   },
-  
   "eslintConfig": {
     "extends": "@rnx-kit/eslint-config"
   },
@@ -59,6 +72,12 @@
   "rnx-kit": {
     "reactNativeVersion": "^0.65",
     "kitType": "app",
+    "bundle": {
+      "entryPath": "src/index.js",
+      "distPath": "dist",
+      "assetsPath": "dist",
+      "bundlePrefix": "main"
+    },
     "capabilities": [
       "core",
       "core-android",
@@ -67,7 +86,10 @@
       "hooks",
       "navigation/native",
       "navigation/stack",
-      "test-app"
+      "test-app",
+      "hermes",
+      "screens",
+      "storage"
     ],
     "detectCyclicDependencies": true,
     "detectDuplicateDependencies": {
@@ -77,6 +99,15 @@
     },
     "typescriptValidation": true,
     "experimental_treeShake": false,
+    "targets": [
+      "android",
+      "ios"
+    ],
+    "platforms": {
+      "android": {
+        "assetsPath": "dist/res"
+      }
+    },
     "server": {
       "detectDuplicateDependencies": {
         "ignoredModules": [

@@ -1,23 +1,13 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
+// metro.config.js
+const { makeMetroConfig } = require("@rnx-kit/metro-config");
 const {
-  makeMetroConfig,
-  // excludeExtraCopiesOf,
-  // exclusionList,
-} = require('@rnx-kit/metro-config');
-const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
+  TypeScriptValidation,
+} = require("@rnx-kit/metro-plugin-typescript-validation");
 
-// const additionalExclusions = [excludeExtraCopiesOf('react')];
-// const blockList = exclusionList(additionalExclusions);
-
+const { MetroSerializer } = require("@rnx-kit/metro-serializer");
 module.exports = makeMetroConfig({
   projectRoot: __dirname,
-  resolver: {
-    resolveRequest: MetroSymlinksResolver.default(),
-  },
-  // blockList, // For Metro >= 0.60
+  // serializer: {
+  //   customSerializer: MetroSerializer([TypeScriptValidation()]),
+  // },
 });
