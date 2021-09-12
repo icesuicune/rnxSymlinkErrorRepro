@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "commit": "clear && git-cz"
+    "commit": "clear && git-cz",
+    "start": "just-scripts"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,16 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@types/node": "^16.9.1",
+    "@types/rimraf": "^3.0.2",
     "git-cz": "^4.7.6",
     "husky": "^7.0.2",
+    "just-scripts": "^1.5.8",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
-    "typescript": "^4.4.2"
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
   },
   "commitlint": {
     "extends": [
@@ -36,6 +42,5 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
-  },
-
+  }
 }

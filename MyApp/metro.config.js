@@ -1,13 +1,10 @@
 // metro.config.js
-const { makeMetroConfig } = require("@rnx-kit/metro-config");
-const {
-  TypeScriptValidation,
-} = require("@rnx-kit/metro-plugin-typescript-validation");
-
-const { MetroSerializer } = require("@rnx-kit/metro-serializer");
+const {makeMetroConfig} = require('@rnx-kit/metro-config');
+const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
+const path = require('path');
 module.exports = makeMetroConfig({
-  projectRoot: __dirname,
-  // serializer: {
-  //   customSerializer: MetroSerializer([TypeScriptValidation()]),
-  // },
+  projectRoot: path.join(__dirname, 'src'),
+  resolver: {
+    resolveRequest: MetroSymlinksResolver(),
+  },
 });
